@@ -7,8 +7,8 @@ A complete machine learning project that predicts gender based on physical facia
 ## 📁 Project Structure
 
 ```
-├── Gender\\\_classification.ipynb   # Main Jupyter Notebook
-├── gender\\\_classification.csv     # Dataset
+├── Gender\_classification.ipynb   # Main Jupyter Notebook
+├── gender\_classification.csv     # Dataset
 └── README.md                     # Project documentation
 ```
 
@@ -22,16 +22,16 @@ Predict a person's **gender (Male/Female)** based on physical facial measurement
 
 ## 📦 Dataset
 
-The dataset (`gender\\\_classification.csv`) contains physical facial measurements used to classify gender.
+The dataset (`gender\_classification.csv`) contains physical facial measurements used to classify gender.
 
 |Column|Description|
 |-|-|
-|`forehead\\\_width\\\_cm`|Width of the forehead in cm|
-|`forehead\\\_height\\\_cm`|Height of the forehead in cm|
-|`nose\\\_wide`|Whether the nose is wide (binary)|
-|`nose\\\_long`|Whether the nose is long (binary)|
-|`lips\\\_thin`|Whether the lips are thin (binary)|
-|`distance\\\_nose\\\_to\\\_lip\\\_long`|Distance from nose to lip (binary)|
+|`forehead\_width\_cm`|Width of the forehead in cm|
+|`forehead\_height\_cm`|Height of the forehead in cm|
+|`nose\_wide`|Whether the nose is wide (binary)|
+|`nose\_long`|Whether the nose is long (binary)|
+|`lips\_thin`|Whether the lips are thin (binary)|
+|`distance\_nose\_to\_lip\_long`|Distance from nose to lip (binary)|
 |`gender`|Target variable — Male (1) / Female (0)|
 
 \---
@@ -44,15 +44,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from sklearn.model\\\_selection import train\\\_test\\\_split, StratifiedKFold, cross\\\_val\\\_score, learning\\\_curve
+from sklearn.model\_selection import train\_test\_split, StratifiedKFold, cross\_val\_score, learning\_curve
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from sklearn.linear\\\_model import LogisticRegression
+from sklearn.linear\_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive\\\_bayes import GaussianNB
+from sklearn.naive\_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy\\\_score, confusion\\\_matrix, classification\\\_report
+from sklearn.metrics import accuracy\_score, confusion\_matrix, classification\_report
 from imblearn.pipeline import Pipeline
 ```
 
@@ -68,7 +68,7 @@ from imblearn.pipeline import Pipeline
 ### 2\. Data Preprocessing
 
 * ✅ Checked for **missing values** → None found
-* ✅ Removed **duplicate records** using `drop\\\_duplicates()`
+* ✅ Removed **duplicate records** using `drop\_duplicates()`
 * 🔤 **Encoded target variable** `gender`: Male → 1, Female → 0
 
 ### 3\. Exploratory Data Analysis (EDA)
@@ -96,19 +96,19 @@ A simple linear classifier that models the probability of belonging to each clas
 **Best for:** linearly separable data, fast baseline model.
 
 ```python
-lr\\\_model = LogisticRegression()
+lr\_model = LogisticRegression()
 ```
 
 \---
 
 ### 🌳 Model 2 — Decision Tree
 
-Splits the data based on feature thresholds to make predictions. Used with `max\\\_depth=3` and `min\\\_samples\\\_leaf=3` to avoid overfitting.
+Splits the data based on feature thresholds to make predictions. Used with `max\_depth=3` and `min\_samples\_leaf=3` to avoid overfitting.
 
 **Best for:** interpretable models, non-linear boundaries.
 
 ```python
-DecisionTreeClassifier(max\\\_depth=3, min\\\_samples\\\_leaf=3, random\\\_state=42)
+DecisionTreeClassifier(max\_depth=3, min\_samples\_leaf=3, random\_state=42)
 ```
 
 \---
@@ -120,7 +120,7 @@ A probabilistic classifier based on Bayes' theorem that assumes feature independ
 **Best for:** fast training, works well with small datasets.
 
 ```python
-nb\\\_model = GaussianNB()
+nb\_model = GaussianNB()
 ```
 
 \---
@@ -132,7 +132,7 @@ Classifies a point based on the majority class among its K=3 nearest neighbors. 
 **Best for:** simple non-linear boundaries, small-to-medium datasets.
 
 ```python
-KNeighborsClassifier(n\\\_neighbors=3)
+KNeighborsClassifier(n\_neighbors=3)
 ```
 
 \---
@@ -151,15 +151,15 @@ SVC(kernel='linear')
 
 ## 📊 Model Comparison (Results)
 
-|Model|Accuracy|CV Mean Accuracy|
-|-|-|-|
-|Logistic Regression|\~97%|\~97%|
-|Decision Tree|\~96%|\~96%|
-|Naive Bayes|\~96%|\~96%|
-|KNN|\~97%|\~97%|
-|**SVM**|**\~98%**|**\~98%**|
+|Rank|Model|Test Accuracy|CV Mean Accuracy|
+|-|-|-|-|
+|🥇 1|**Naive Bayes**|**95.83%**|**95.79%**|
+|🥈 2|KNN|94.44%|94.63%|
+|🥉 3|Logistic Regression|94.28%|95.17%|
+|4|SVM|94.13%|94.93%|
+|5|Decision Tree|93.97%|93.97%|
 
-> 📌 \\\*\\\*Best Model:\\\*\\\* SVM (Support Vector Machine) with a linear kernel achieved the highest accuracy on this dataset.
+> 📌 \*\*Best Model:\*\* Naive Bayes achieved the highest test accuracy of \*\*95.83%\*\* on this dataset.
 
 \---
 
@@ -194,7 +194,7 @@ Each model includes:
 3. **Cross-validation** provided a more reliable estimate than a single train-test split.
 4. **Learning Curves** showed no significant overfitting across any of the models.
 5. **Forehead width** and **forehead height** were among the most distinguishing features between genders.
-6. **SVM** with a linear kernel was the best performing model overall.
+6. **Naive Bayes** was the best performing model with **95.83% accuracy**, despite its simplicity.
 
 \---
 
@@ -202,7 +202,7 @@ Each model includes:
 
 |Question|Answer|
 |-|-|
-|Best model?|**SVM (Linear Kernel)**|
+|Best model?|**Naive Bayes (95.83%)**|
 |Most important features?|**Forehead width \& height**|
 |Any overfitting?|No — learning curves were stable|
 |Was scaling necessary?|Yes — especially for KNN and SVM|
@@ -219,22 +219,22 @@ Each model includes:
    pip install pandas numpy matplotlib seaborn scikit-learn imbalanced-learn
    ```
 
-3. Place `gender\\\_classification.csv` in the same directory as the notebook
-4. Open and run `Gender\\\_classification.ipynb` cell by cell in Jupyter Notebook or JupyterLab
+3. Place `gender\_classification.csv` in the same directory as the notebook
+4. Open and run `Gender\_classification.ipynb` cell by cell in Jupyter Notebook or JupyterLab
 
 \---
 
-#### \## Developed by  
+## \## Developed by  
 
-\* Enas Ibrahim Ali Elnsag
+##### \* Enas Ibrahim Ali Elnsag
 
-\* Malak Tamer Mohamed Ali
+##### \* Malak Tamer Mohamed Ali
 
-\* Salma Amer Ahmed Abdel Fattah
+##### \* Salma Amer Ahmed Abdel Fattah
 
-\* Fatma Mohamed Helmy Mohamed
+##### \* Fatma Mohamed Helmy Mohamed
 
-\* Mariem Medhet Afifi
+##### \* Mariem Medhet Afifi
 
 
 
