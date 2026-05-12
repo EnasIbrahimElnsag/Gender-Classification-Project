@@ -2,39 +2,39 @@
 
 A complete machine learning project that predicts gender based on physical facial features using **five classification algorithms**: Logistic Regression, Decision Tree, Naive Bayes, KNN, and SVM — with full evaluation, cross-validation, and model comparison.
 
----
+\---
 
 ## 📁 Project Structure
 
 ```
-├── Gender_classification.ipynb   # Main Jupyter Notebook
-├── gender_classification.csv     # Dataset
+├── Gender\\\_classification.ipynb   # Main Jupyter Notebook
+├── gender\\\_classification.csv     # Dataset
 └── README.md                     # Project documentation
 ```
 
----
+\---
 
 ## 🎯 Objective
 
 Predict a person's **gender (Male/Female)** based on physical facial measurements, and compare the performance of five different classification algorithms to find the best model.
 
----
+\---
 
 ## 📦 Dataset
 
-The dataset (`gender_classification.csv`) contains physical facial measurements used to classify gender.
+The dataset (`gender\\\_classification.csv`) contains physical facial measurements used to classify gender.
 
-| Column | Description |
-|---|---|
-| `forehead_width_cm` | Width of the forehead in cm |
-| `forehead_height_cm` | Height of the forehead in cm |
-| `nose_wide` | Whether the nose is wide (binary) |
-| `nose_long` | Whether the nose is long (binary) |
-| `lips_thin` | Whether the lips are thin (binary) |
-| `distance_nose_to_lip_long` | Distance from nose to lip (binary) |
-| `gender` | Target variable — Male (1) / Female (0) |
+|Column|Description|
+|-|-|
+|`forehead\\\_width\\\_cm`|Width of the forehead in cm|
+|`forehead\\\_height\\\_cm`|Height of the forehead in cm|
+|`nose\\\_wide`|Whether the nose is wide (binary)|
+|`nose\\\_long`|Whether the nose is long (binary)|
+|`lips\\\_thin`|Whether the lips are thin (binary)|
+|`distance\\\_nose\\\_to\\\_lip\\\_long`|Distance from nose to lip (binary)|
+|`gender`|Target variable — Male (1) / Female (0)|
 
----
+\---
 
 ## 🛠️ Libraries Used
 
@@ -44,92 +44,101 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score, learning_curve
+from sklearn.model\\\_selection import train\\\_test\\\_split, StratifiedKFold, cross\\\_val\\\_score, learning\\\_curve
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear\\\_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive\\\_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import accuracy\\\_score, confusion\\\_matrix, classification\\\_report
 from imblearn.pipeline import Pipeline
 ```
 
----
+\---
 
 ## 🔄 Workflow
 
-### 1. Data Loading & Understanding
-- Loaded the CSV dataset using `pandas`
-- Explored shape, data types, and statistical summaries
+### 1\. Data Loading \& Understanding
 
-### 2. Data Preprocessing
-- ✅ Checked for **missing values** → None found
-- ✅ Removed **duplicate records** using `drop_duplicates()`
-- 🔤 **Encoded target variable** `gender`: Male → 1, Female → 0
+* Loaded the CSV dataset using `pandas`
+* Explored shape, data types, and statistical summaries
 
-### 3. Exploratory Data Analysis (EDA)
-- **Correlation Heatmap** — examined relationships between all features
-- **Class Distribution** — checked balance between Male/Female classes
-- **Feature Distributions** — histograms for all numeric features
-- **Pairplot** — explored pairwise relationships
-- **Boxplots** — compared forehead width & height across genders
+### 2\. Data Preprocessing
 
-### 4. Feature Scaling & Splitting
-- **80/20 train-test split** with `stratify=y` to maintain class balance
-- **StandardScaler** applied to normalize features (critical for KNN & SVM)
-- **StratifiedKFold (5 splits)** used for cross-validation
+* ✅ Checked for **missing values** → None found
+* ✅ Removed **duplicate records** using `drop\\\_duplicates()`
+* 🔤 **Encoded target variable** `gender`: Male → 1, Female → 0
 
----
+### 3\. Exploratory Data Analysis (EDA)
+
+* **Correlation Heatmap** — examined relationships between all features
+* **Class Distribution** — checked balance between Male/Female classes
+* **Feature Distributions** — histograms for all numeric features
+* **Pairplot** — explored pairwise relationships
+* **Boxplots** — compared forehead width \& height across genders
+
+### 4\. Feature Scaling \& Splitting
+
+* **80/20 train-test split** with `stratify=y` to maintain class balance
+* **StandardScaler** applied to normalize features (critical for KNN \& SVM)
+* **StratifiedKFold (5 splits)** used for cross-validation
+
+\---
 
 ## 🤖 Models
 
 ### 🔵 Model 1 — Logistic Regression
+
 A simple linear classifier that models the probability of belonging to each class.
 
 **Best for:** linearly separable data, fast baseline model.
 
 ```python
-lr_model = LogisticRegression()
+lr\\\_model = LogisticRegression()
 ```
 
----
+\---
 
 ### 🌳 Model 2 — Decision Tree
-Splits the data based on feature thresholds to make predictions. Used with `max_depth=3` and `min_samples_leaf=3` to avoid overfitting.
+
+Splits the data based on feature thresholds to make predictions. Used with `max\\\_depth=3` and `min\\\_samples\\\_leaf=3` to avoid overfitting.
 
 **Best for:** interpretable models, non-linear boundaries.
 
 ```python
-DecisionTreeClassifier(max_depth=3, min_samples_leaf=3, random_state=42)
+DecisionTreeClassifier(max\\\_depth=3, min\\\_samples\\\_leaf=3, random\\\_state=42)
 ```
 
----
+\---
 
 ### 🟡 Model 3 — Naive Bayes
+
 A probabilistic classifier based on Bayes' theorem that assumes feature independence.
 
 **Best for:** fast training, works well with small datasets.
 
 ```python
-nb_model = GaussianNB()
+nb\\\_model = GaussianNB()
 ```
 
----
+\---
 
 ### 🟠 Model 4 — K-Nearest Neighbors (KNN)
+
 Classifies a point based on the majority class among its K=3 nearest neighbors. Decision boundary visualized using PCA (2D).
 
 **Best for:** simple non-linear boundaries, small-to-medium datasets.
 
 ```python
-KNeighborsClassifier(n_neighbors=3)
+KNeighborsClassifier(n\\\_neighbors=3)
 ```
 
----
+\---
 
 ### 🔴 Model 5 — Support Vector Machine (SVM)
+
 Finds the optimal hyperplane that separates classes with maximum margin using a linear kernel.
 
 **Best for:** high-dimensional data, robust to outliers.
@@ -138,44 +147,45 @@ Finds the optimal hyperplane that separates classes with maximum margin using a 
 SVC(kernel='linear')
 ```
 
----
+\---
 
 ## 📊 Model Comparison (Results)
 
-| Model | Accuracy | CV Mean Accuracy |
-|---|---|---|
-| Logistic Regression | ~97% | ~97% |
-| Decision Tree | ~96% | ~96% |
-| Naive Bayes | ~96% | ~96% |
-| KNN | ~97% | ~97% |
-| **SVM** | **~98%** | **~98%** |
+|Model|Accuracy|CV Mean Accuracy|
+|-|-|-|
+|Logistic Regression|\~97%|\~97%|
+|Decision Tree|\~96%|\~96%|
+|Naive Bayes|\~96%|\~96%|
+|KNN|\~97%|\~97%|
+|**SVM**|**\~98%**|**\~98%**|
 
-> 📌 **Best Model:** SVM (Support Vector Machine) with a linear kernel achieved the highest accuracy on this dataset.
+> 📌 \\\*\\\*Best Model:\\\*\\\* SVM (Support Vector Machine) with a linear kernel achieved the highest accuracy on this dataset.
 
----
+\---
 
 ## 📈 Evaluation Metrics
 
 Each model was evaluated using:
 
-| Metric | Description |
-|---|---|
-| **Accuracy** | Overall correct predictions / total predictions |
-| **Confusion Matrix** | Visual breakdown of True/False Positives & Negatives |
-| **Classification Report** | Precision, Recall, F1-Score per class |
-| **Cross-Validation** | 5-Fold StratifiedKFold for robust evaluation |
-| **Learning Curve** | Training vs Validation accuracy across dataset sizes |
+|Metric|Description|
+|-|-|
+|**Accuracy**|Overall correct predictions / total predictions|
+|**Confusion Matrix**|Visual breakdown of True/False Positives \& Negatives|
+|**Classification Report**|Precision, Recall, F1-Score per class|
+|**Cross-Validation**|5-Fold StratifiedKFold for robust evaluation|
+|**Learning Curve**|Training vs Validation accuracy across dataset sizes|
 
----
+\---
 
 ## 📉 Visualizations
 
 Each model includes:
-- **Confusion Matrix Heatmap** — shows prediction errors per class
-- **Learning Curve** — detects overfitting or underfitting
-- **KNN Decision Boundary** — 2D visualization using PCA
 
----
+* **Confusion Matrix Heatmap** — shows prediction errors per class
+* **Learning Curve** — detects overfitting or underfitting
+* **KNN Decision Boundary** — 2D visualization using PCA
+
+\---
 
 ## 🔍 Key Findings
 
@@ -186,32 +196,45 @@ Each model includes:
 5. **Forehead width** and **forehead height** were among the most distinguishing features between genders.
 6. **SVM** with a linear kernel was the best performing model overall.
 
----
+\---
 
 ## ✅ Conclusion
 
-| Question | Answer |
-|---|---|
-| Best model? | **SVM (Linear Kernel)** |
-| Most important features? | **Forehead width & height** |
-| Any overfitting? | No — learning curves were stable |
-| Was scaling necessary? | Yes — especially for KNN and SVM |
-| Class balance? | Balanced — stratified split was used |
+|Question|Answer|
+|-|-|
+|Best model?|**SVM (Linear Kernel)**|
+|Most important features?|**Forehead width \& height**|
+|Any overfitting?|No — learning curves were stable|
+|Was scaling necessary?|Yes — especially for KNN and SVM|
+|Class balance?|Balanced — stratified split was used|
 
----
+\---
 
 ## 🚀 How to Run
 
 1. Clone or download the project files
 2. Install required libraries:
-   ```bash
+
+```bash
    pip install pandas numpy matplotlib seaborn scikit-learn imbalanced-learn
    ```
-3. Place `gender_classification.csv` in the same directory as the notebook
-4. Open and run `Gender_classification.ipynb` cell by cell in Jupyter Notebook or JupyterLab
 
----
+3. Place `gender\\\_classification.csv` in the same directory as the notebook
+4. Open and run `Gender\\\_classification.ipynb` cell by cell in Jupyter Notebook or JupyterLab
 
-## 👩‍💻 Author
+\---
 
-This project was built as a classification study comparing five ML algorithms on a gender classification dataset using physical facial features.
+#### \## Developed by  
+
+\* Enas Ibrahim Ali Elnsag
+
+\* Malak Tamer Mohamed Ali
+
+\* Salma Amer Ahmed Abdel Fattah
+
+\* Fatma Mohamed Helmy Mohamed
+
+\* Mariem Medhet Afifi
+
+
+
