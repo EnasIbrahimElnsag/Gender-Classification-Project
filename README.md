@@ -7,9 +7,18 @@ A complete machine learning project that predicts gender based on physical facia
 ## 📁 Project Structure
 
 ```
-├── Gender\\\\\\\_classification.ipynb   # Main Jupyter Notebook
-├── gender\\\\\\\_classification.csv     # Dataset
-└── README.md                     # Project documentation
+├── Gender\_classification.ipynb # Main Jupyter Notebook
+
+├── gender\_classification\_v7.csv # Dataset
+
+├── app.py # Gradio Interface
+
+├── nb\_model.pkl # Trained Naive Bayes Model
+
+├── scaler.pkl # Saved StandardScaler
+
+└── README.md # Project documentation
+
 ```
 
 \---
@@ -22,16 +31,16 @@ Predict a person's **gender (Male/Female)** based on physical facial measurement
 
 ## 📦 Dataset
 
-The dataset (`gender_classification_v7.csv`) contains physical facial measurements used to classify gender.
+The dataset (`gender\\\\\\\_classification.csv`) contains physical facial measurements used to classify gender.
 
 |Column|Description|
 |-|-|
-|`forehead_width_cm`|Width of the forehead in cm|
-|`forehead_height_cm`|Height of the forehead in cm|
-|`nose_wide`|Whether the nose is wide (binary)|
-|`nose_long`|Whether the nose is long (binary)|
-|`lips_thin`|Whether the lips are thin (binary)|
-|`distance_nose_to_lip_long`|Distance from nose to lip (binary)|
+|`forehead\\\\\\\_width\\\\\\\_cm`|Width of the forehead in cm|
+|`forehead\\\\\\\_height\\\\\\\_cm`|Height of the forehead in cm|
+|`nose\\\\\\\_wide`|Whether the nose is wide (binary)|
+|`nose\\\\\\\_long`|Whether the nose is long (binary)|
+|`lips\\\\\\\_thin`|Whether the lips are thin (binary)|
+|`distance\\\\\\\_nose\\\\\\\_to\\\\\\\_lip\\\\\\\_long`|Distance from nose to lip (binary)|
 |`gender`|Target variable — Male (1) / Female (0)|
 
 \---
@@ -44,15 +53,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score, learning_curve
+from sklearn.model\\\\\\\_selection import train\\\\\\\_test\\\\\\\_split, StratifiedKFold, cross\\\\\\\_val\\\\\\\_score, learning\\\\\\\_curve
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear\\\\\\\_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive\\\\\\\_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import accuracy\\\\\\\_score, confusion\\\\\\\_matrix, classification\\\\\\\_report
 from imblearn.pipeline import Pipeline
 ```
 
@@ -64,11 +73,12 @@ from imblearn.pipeline import Pipeline
 
 * Loaded the CSV dataset using `pandas`
 * Explored shape, data types, and statistical summaries
+* Studied the relationship between features and target variable.
 
 ### 2\. Data Preprocessing
 
 * ✅ Checked for **missing values** → None found
-* ✅ Removed **duplicate records** using `drop_duplicates()`
+* ✅ Removed **duplicate records** using `drop\\\\\\\_duplicates()`
 * 🔤 **Encoded target variable** `gender`: Male → 1, Female → 0
 
 ### 3\. Exploratory Data Analysis (EDA)
@@ -96,19 +106,19 @@ A simple linear classifier that models the probability of belonging to each clas
 **Best for:** linearly separable data, fast baseline model.
 
 ```python
-lr_model = LogisticRegression()
+lr\\\\\\\_model = LogisticRegression()
 ```
 
 \---
 
 ### 🌳 Model 2 — Decision Tree
 
-Splits the data based on feature thresholds to make predictions. Used with `max_depth=3` and `min_samples_leaf=3` to avoid overfitting.
+Splits the data based on feature thresholds to make predictions. Used with `max\\\\\\\_depth=3` and `min\\\\\\\_samples\\\\\\\_leaf=3` to avoid overfitting.
 
 **Best for:** interpretable models, non-linear boundaries.
 
 ```python
-DecisionTreeClassifier(max_depth=3, min_samples_leaf=3, random_state=42)
+DecisionTreeClassifier(max\\\\\\\_depth=3, min\\\\\\\_samples\\\\\\\_leaf=3, random\\\\\\\_state=42)
 ```
 
 \---
@@ -120,7 +130,7 @@ A probabilistic classifier based on Bayes' theorem that assumes feature independ
 **Best for:** fast training, works well with small datasets.
 
 ```python
-nb_model = GaussianNB()
+nb\\\\\\\_model = GaussianNB()
 ```
 
 \---
@@ -132,7 +142,7 @@ Classifies a point based on the majority class among its K=3 nearest neighbors. 
 **Best for:** simple non-linear boundaries, small-to-medium datasets.
 
 ```python
-KNeighborsClassifier(n_neighbors=3)
+KNeighborsClassifier(n\\\\\\\_neighbors=3)
 ```
 
 \---
@@ -159,7 +169,7 @@ SVC(kernel='linear')
 |4|SVM|94.13%|94.93%|
 |5|Decision Tree|93.97%|93.97%|
 
-> 📌 **Best Model:** Naive Bayes achieved the highest test accuracy of **95.83%** on this dataset.
+> 📌 \\\\\\\*\\\\\\\*Best Model:\\\\\\\*\\\\\\\* Naive Bayes achieved the highest test accuracy of \\\\\\\*\\\\\\\*95.83%\\\\\\\*\\\\\\\* on this dataset.
 
 \---
 
@@ -201,15 +211,15 @@ Each model includes:
 
 
 
-## 🌐 Deployment \& User Interface
+\## 🌐 Deployment \& User Interface
 
 
 
-After selecting the best-performing model (**Naive Bayes**), we moved from the experimentation phase to building a simple interactive application.
+After selecting the best-performing model (\*\*Naive Bayes\*\*), we moved from the experimentation phase to building a simple interactive application.
 
 
 
-We developed a user-friendly interface using **Gradio** that allows users to enter facial characteristics and get the predicted gender directly.
+We developed a user-friendly interface using \*\*Gradio\*\* that allows users to enter facial characteristics and get the predicted gender directly.
 
 
 
@@ -217,23 +227,23 @@ The interface takes the following inputs:
 
 
 
-- Long Hair
+\- Long Hair
 
-- Forehead Width
+\- Forehead Width
 
-- Forehead Height
+\- Forehead Height
 
-- Nose Wide
+\- Nose Wide
 
-- Nose Long
+\- Nose Long
 
-- Thin Lips
+\- Thin Lips
 
-- Distance Between Nose and Lip
+\- Distance Between Nose and Lip
 
 
 
-The application uses the trained **Naive Bayes model** to make predictions and display the final result (**Male/Female**).
+The application uses the trained \*\*Naive Bayes model\*\* to make predictions and display the final result (\*\*Male/Female\*\*).
 
 
 
@@ -243,7 +253,7 @@ This step helped us transform the project from a Jupyter Notebook experiment int
 
 🔗 Live Demo:
 
-https://ee3dd8315d81111685.gradio.live
+https://2u.pw/Mz5T6A
 
 
 
@@ -265,15 +275,27 @@ https://ee3dd8315d81111685.gradio.live
 
 ## 🚀 How to Run
 
-1. Clone or download the project files
-2. Install required libraries:
 
-```bash
-   pip install pandas numpy matplotlib seaborn scikit-learn imbalanced-learn
-   ```
 
-3. Place `gender_classification_v7.csv` in the same directory as the notebook
-4. Open and run `Gender_classification.ipynb` cell by cell in Jupyter Notebook or JupyterLab
+Install required libraries:
+
+
+
+pip install pandas numpy matplotlib seaborn scikit-learn gradio joblib
+
+
+
+Run the application:
+
+
+
+python app.py
+
+
+
+The Gradio interface will open and you can test the trained model.
+
+
 
 \---
 
