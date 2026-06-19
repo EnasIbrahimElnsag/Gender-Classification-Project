@@ -201,7 +201,7 @@ Each model includes:
 
 
 
-\## 🌐 Deployment \& User Interface
+## 🌐 Deployment \& User Interface
 
 
 
@@ -217,19 +217,19 @@ The interface takes the following inputs:
 
 
 
-\- Long Hair
+- Long Hair
 
-\- Forehead Width
+- Forehead Width
 
-\- Forehead Height
+- Forehead Height
 
-\- Nose Wide
+- Nose Wide
 
-\- Nose Long
+- Nose Long
 
-\- Thin Lips
+- Thin Lips
 
-\- Distance Between Nose and Lip
+- Distance Between Nose and Lip
 
 
 
