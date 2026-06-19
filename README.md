@@ -22,16 +22,16 @@ Predict a person's **gender (Male/Female)** based on physical facial measurement
 
 ## 📦 Dataset
 
-The dataset (`gender\\\\\\\_classification.csv`) contains physical facial measurements used to classify gender.
+The dataset (`gender_classification_v7.csv`) contains physical facial measurements used to classify gender.
 
 |Column|Description|
 |-|-|
-|`forehead\\\\\\\_width\\\\\\\_cm`|Width of the forehead in cm|
-|`forehead\\\\\\\_height\\\\\\\_cm`|Height of the forehead in cm|
-|`nose\\\\\\\_wide`|Whether the nose is wide (binary)|
-|`nose\\\\\\\_long`|Whether the nose is long (binary)|
-|`lips\\\\\\\_thin`|Whether the lips are thin (binary)|
-|`distance\\\\\\\_nose\\\\\\\_to\\\\\\\_lip\\\\\\\_long`|Distance from nose to lip (binary)|
+|`forehead_width_cm`|Width of the forehead in cm|
+|`forehead_height_cm`|Height of the forehead in cm|
+|`nose_wide`|Whether the nose is wide (binary)|
+|`nose_long`|Whether the nose is long (binary)|
+|`lips_thin`|Whether the lips are thin (binary)|
+|`distance_nose_to_lip_long`|Distance from nose to lip (binary)|
 |`gender`|Target variable — Male (1) / Female (0)|
 
 \---
@@ -44,15 +44,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from sklearn.model\\\\\\\_selection import train\\\\\\\_test\\\\\\\_split, StratifiedKFold, cross\\\\\\\_val\\\\\\\_score, learning\\\\\\\_curve
+from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score, learning_curve
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from sklearn.linear\\\\\\\_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive\\\\\\\_bayes import GaussianNB
+from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy\\\\\\\_score, confusion\\\\\\\_matrix, classification\\\\\\\_report
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from imblearn.pipeline import Pipeline
 ```
 
@@ -68,7 +68,7 @@ from imblearn.pipeline import Pipeline
 ### 2\. Data Preprocessing
 
 * ✅ Checked for **missing values** → None found
-* ✅ Removed **duplicate records** using `drop\\\\\\\_duplicates()`
+* ✅ Removed **duplicate records** using `drop_duplicates()`
 * 🔤 **Encoded target variable** `gender`: Male → 1, Female → 0
 
 ### 3\. Exploratory Data Analysis (EDA)
@@ -96,19 +96,19 @@ A simple linear classifier that models the probability of belonging to each clas
 **Best for:** linearly separable data, fast baseline model.
 
 ```python
-lr\\\\\\\_model = LogisticRegression()
+lr_model = LogisticRegression()
 ```
 
 \---
 
 ### 🌳 Model 2 — Decision Tree
 
-Splits the data based on feature thresholds to make predictions. Used with `max\\\\\\\_depth=3` and `min\\\\\\\_samples\\\\\\\_leaf=3` to avoid overfitting.
+Splits the data based on feature thresholds to make predictions. Used with `max_depth=3` and `min_samples_leaf=3` to avoid overfitting.
 
 **Best for:** interpretable models, non-linear boundaries.
 
 ```python
-DecisionTreeClassifier(max\\\\\\\_depth=3, min\\\\\\\_samples\\\\\\\_leaf=3, random\\\\\\\_state=42)
+DecisionTreeClassifier(max_depth=3, min_samples_leaf=3, random_state=42)
 ```
 
 \---
@@ -120,7 +120,7 @@ A probabilistic classifier based on Bayes' theorem that assumes feature independ
 **Best for:** fast training, works well with small datasets.
 
 ```python
-nb\\\\\\\_model = GaussianNB()
+nb_model = GaussianNB()
 ```
 
 \---
@@ -132,7 +132,7 @@ Classifies a point based on the majority class among its K=3 nearest neighbors. 
 **Best for:** simple non-linear boundaries, small-to-medium datasets.
 
 ```python
-KNeighborsClassifier(n\\\\\\\_neighbors=3)
+KNeighborsClassifier(n_neighbors=3)
 ```
 
 \---
@@ -159,7 +159,7 @@ SVC(kernel='linear')
 |4|SVM|94.13%|94.93%|
 |5|Decision Tree|93.97%|93.97%|
 
-> 📌 \\\\\\\*\\\\\\\*Best Model:\\\\\\\*\\\\\\\* Naive Bayes achieved the highest test accuracy of \\\\\\\*\\\\\\\*95.83%\\\\\\\*\\\\\\\* on this dataset.
+> 📌 **Best Model:** Naive Bayes achieved the highest test accuracy of **95.83%** on this dataset.
 
 \---
 
@@ -272,8 +272,8 @@ https://ee3dd8315d81111685.gradio.live
    pip install pandas numpy matplotlib seaborn scikit-learn imbalanced-learn
    ```
 
-3. Place `gender\\\\\\\_classification.csv` in the same directory as the notebook
-4. Open and run `Gender\\\\\\\_classification.ipynb` cell by cell in Jupyter Notebook or JupyterLab
+3. Place `gender_classification_v7.csv` in the same directory as the notebook
+4. Open and run `Gender_classification.ipynb` cell by cell in Jupyter Notebook or JupyterLab
 
 \---
 
