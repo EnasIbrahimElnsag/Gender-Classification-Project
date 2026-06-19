@@ -205,11 +205,11 @@ Each model includes:
 
 
 
-After selecting the best-performing model (\*\*Naive Bayes\*\*), we moved from the experimentation phase to building a simple interactive application.
+After selecting the best-performing model (**Naive Bayes**), we moved from the experimentation phase to building a simple interactive application.
 
 
 
-We developed a user-friendly interface using \*\*Gradio\*\* that allows users to enter facial characteristics and get the predicted gender directly.
+We developed a user-friendly interface using **Gradio** that allows users to enter facial characteristics and get the predicted gender directly.
 
 
 
@@ -233,7 +233,7 @@ The interface takes the following inputs:
 
 
 
-The application uses the trained \*\*Naive Bayes model\*\* to make predictions and display the final result (\*\*Male/Female\*\*).
+The application uses the trained **Naive Bayes model** to make predictions and display the final result (**Male/Female**).
 
 
 
