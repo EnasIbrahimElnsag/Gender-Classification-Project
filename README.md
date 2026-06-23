@@ -1,313 +1,198 @@
-# 👤 Gender Classification — ML Pipeline
+# 🚀 Gender Classification Using Machine Learning
 
-A complete machine learning project that predicts gender based on physical facial features using **five classification algorithms**: Logistic Regression, Decision Tree, Naive Bayes, KNN, and SVM — with full evaluation, cross-validation, and model comparison.
+> A complete Machine Learning classification project that predicts gender based on facial features using different classification algorithms and selecting the best performing model.
+> Developed as part of the Machine Learning course to apply classification techniques, compare multiple models, and build an interactive prediction application.
+
+\---
+
+## 🎯 Objective
+
+Classify gender based on facial features and determine the **best machine learning model** that achieves the highest prediction accuracy.
+
+**Target Classes:**
+
+* 👨 Male
+* 👩 Female
+
+\---
+
+## 📂 Dataset
+
+The dataset contains facial feature measurements used to classify samples into two gender classes:
+
+|Feature|Description|
+|-|-|
+|Long Hair|Indicates whether the person has long hair|
+|Forehead Width|Width measurement of the forehead|
+|Forehead Height|Height measurement of the forehead|
+|Nose Wide|Indicates nose width|
+|Nose Long|Indicates nose length|
+|Thin Lips|Indicates whether lips are thin|
+|Distance Between Nose and Lip|Distance measurement between nose and lip|
+
+\---
+
+## 🔄 Project Workflow
+
+### 1\. Data Understanding
+
+* 📋 Loaded and explored the dataset
+* 🔍 Checked dataset shape and feature information
+* 📊 Studied feature distributions
+* 🔗 Analyzed the relationship between features and target variable
+
+### 2\. Data Preprocessing
+
+* ✅ Checked for missing values
+* ✅ Checked for duplicate records
+* ✅ Prepared features and target variable
+* ✅ Encoded the target labels
+* ✅ Applied feature scaling using **StandardScaler**
+
+\---
+
+## 📊 Exploratory Data Analysis (EDA)
+
+Performed different analysis techniques:
+
+* 🔗 Correlation Analysis
+* 📈 Feature relationship analysis
+* 📉 Data distribution visualization
+
+The analysis helped understand the importance of each feature before model training.
+
+\---
+
+## 🤖 Machine Learning Models
+
+Several classification algorithms were trained and compared:
+
+### 🔹 Logistic Regression
+
+A linear classification model used to estimate the probability of each class.
+
+### 🔹 Decision Tree Classifier
+
+A tree-based model that learns decision rules from the features, optimized to reduce overfitting:
+
+```python
+DecisionTreeClassifier(
+    max\_depth=3,
+    min\_samples\_leaf=3
+)
+```
+
+### 🔹 K-Nearest Neighbors (KNN)
+
+A distance-based algorithm that predicts the class based on the nearest samples.
+
+### 🔹 Support Vector Machine (SVM)
+
+A powerful classifier that finds the best decision boundary between classes.
+
+### 🔹 Naive Bayes
+
+A probabilistic classifier based on Bayes' theorem. **Gaussian Naive Bayes achieved the best performance** on this dataset.
+
+\---
+
+## 📈 Model Evaluation
+
+Models were evaluated using:
+
+* **Accuracy Score**
+* **Cross Validation**
+* **Confusion Matrix**
+
+### Results
+
+|Model|Accuracy|
+|-|-|
+|**Naive Bayes** ✅|**95.83%**|
+|KNN|94.44%|
+|Logistic Regression|94.28%|
+|SVM|94.13%|
+|Decision Tree|93.97%|
+
+> 🏆 \*\*Best Model: Gaussian Naive Bayes\*\* — achieved the highest accuracy of \*\*95.83%\*\*.
+> The model performed well because the facial features provided strong distinguishable patterns between the two classes.
+
+\---
+
+## 🚀 Interactive Application
+
+A **Gradio-powered** web application was developed to make the model accessible:
+
+* 🖊️ Users enter facial feature values
+* ⚡ Real-time gender prediction using the trained model
+* 💡 User-friendly and intuitive interface
+* 🌐 Deployed on Hugging Face Spaces for public access
+
+### 🔗 Live Demo
+
+👉 *https://huggingface.co/spaces/Enasibrahim/Gender\_Classification*
+
+\---
+
+## 🛠️ Technologies Used
+
+|Library|Purpose|
+|-|-|
+|Python|Core programming language|
+|Pandas|Data loading, cleaning, and manipulation|
+|NumPy|Numerical computations|
+|Scikit-learn|Model implementation and evaluation|
+|Matplotlib|Data visualization|
+|Seaborn|Statistical data visualization|
+|Gradio|Interactive web application interface|
 
 \---
 
 ## 📁 Project Structure
 
 ```
-├── Gender\_classification.ipynb # Main Jupyter Notebook
-
-├── gender\_classification\_v7.csv # Dataset
-
-├── app.py # Gradio Interface
-
-├── nb\_model.pkl # Trained Naive Bayes Model
-
-├── scaler.pkl # Saved StandardScaler
-
-└── README.md # Project documentation
-
+├── Gender\_Classification.ipynb
+├── gender.csv
+├── model.pkl
+├── app.py
+├── requirements.txt
+└── README.md
 ```
 
 \---
 
-## 🎯 Objective
+## 👥 Team Members
 
-Predict a person's **gender (Male/Female)** based on physical facial measurements, and compare the performance of five different classification algorithms to find the best model.
-
-\---
-
-## 📦 Dataset
-
-The dataset (`gender\\\\\\\_classification.csv`) contains physical facial measurements used to classify gender.
-
-|Column|Description|
+|#|Name|
 |-|-|
-|`forehead\\\\\\\_width\\\\\\\_cm`|Width of the forehead in cm|
-|`forehead\\\\\\\_height\\\\\\\_cm`|Height of the forehead in cm|
-|`nose\\\\\\\_wide`|Whether the nose is wide (binary)|
-|`nose\\\\\\\_long`|Whether the nose is long (binary)|
-|`lips\\\\\\\_thin`|Whether the lips are thin (binary)|
-|`distance\\\\\\\_nose\\\\\\\_to\\\\\\\_lip\\\\\\\_long`|Distance from nose to lip (binary)|
-|`gender`|Target variable — Male (1) / Female (0)|
+|1|Enas Ibrahim Ali Elnsag|
+|2|Malak Tamer Mohamed Ali|
+|3|Salma Amer Ahmed Abdel Fattah|
+|4|Fatma Mohamed Helmy Mohamed|
+|5|Mariem Medhat Afifi|
 
 \---
-
-## 🛠️ Libraries Used
-
-```python
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-from sklearn.model\\\\\\\_selection import train\\\\\\\_test\\\\\\\_split, StratifiedKFold, cross\\\\\\\_val\\\\\\\_score, learning\\\\\\\_curve
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-from sklearn.linear\\\\\\\_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive\\\\\\\_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
-from sklearn.metrics import accuracy\\\\\\\_score, confusion\\\\\\\_matrix, classification\\\\\\\_report
-from imblearn.pipeline import Pipeline
-```
-
-\---
-
-## 🔄 Workflow
-
-### 1\. Data Loading \& Understanding
-
-* Loaded the CSV dataset using `pandas`
-* Explored shape, data types, and statistical summaries
-* Studied the relationship between features and target variable.
-
-### 2\. Data Preprocessing
-
-* ✅ Checked for **missing values** → None found
-* ✅ Removed **duplicate records** using `drop\\\\\\\_duplicates()`
-* 🔤 **Encoded target variable** `gender`: Male → 1, Female → 0
-
-### 3\. Exploratory Data Analysis (EDA)
-
-* **Correlation Heatmap** — examined relationships between all features
-* **Class Distribution** — checked balance between Male/Female classes
-* **Feature Distributions** — histograms for all numeric features
-* **Pairplot** — explored pairwise relationships
-* **Boxplots** — compared forehead width \& height across genders
-
-### 4\. Feature Scaling \& Splitting
-
-* **80/20 train-test split** with `stratify=y` to maintain class balance
-* **StandardScaler** applied to normalize features (critical for KNN \& SVM)
-* **StratifiedKFold (5 splits)** used for cross-validation
-
-\---
-
-## 🤖 Models
-
-### 🔵 Model 1 — Logistic Regression
-
-A simple linear classifier that models the probability of belonging to each class.
-
-**Best for:** linearly separable data, fast baseline model.
-
-```python
-lr\\\\\\\_model = LogisticRegression()
-```
-
-\---
-
-### 🌳 Model 2 — Decision Tree
-
-Splits the data based on feature thresholds to make predictions. Used with `max\\\\\\\_depth=3` and `min\\\\\\\_samples\\\\\\\_leaf=3` to avoid overfitting.
-
-**Best for:** interpretable models, non-linear boundaries.
-
-```python
-DecisionTreeClassifier(max\\\\\\\_depth=3, min\\\\\\\_samples\\\\\\\_leaf=3, random\\\\\\\_state=42)
-```
-
-\---
-
-### 🟡 Model 3 — Naive Bayes
-
-A probabilistic classifier based on Bayes' theorem that assumes feature independence.
-
-**Best for:** fast training, works well with small datasets.
-
-```python
-nb\\\\\\\_model = GaussianNB()
-```
-
-\---
-
-### 🟠 Model 4 — K-Nearest Neighbors (KNN)
-
-Classifies a point based on the majority class among its K=3 nearest neighbors. Decision boundary visualized using PCA (2D).
-
-**Best for:** simple non-linear boundaries, small-to-medium datasets.
-
-```python
-KNeighborsClassifier(n\\\\\\\_neighbors=3)
-```
-
-\---
-
-### 🔴 Model 5 — Support Vector Machine (SVM)
-
-Finds the optimal hyperplane that separates classes with maximum margin using a linear kernel.
-
-**Best for:** high-dimensional data, robust to outliers.
-
-```python
-SVC(kernel='linear')
-```
-
-\---
-
-## 📊 Model Comparison (Results)
-
-|Rank|Model|Test Accuracy|CV Mean Accuracy|
-|-|-|-|-|
-|🥇 1|**Naive Bayes**|**95.83%**|**95.79%**|
-|🥈 2|KNN|94.44%|94.63%|
-|🥉 3|Logistic Regression|94.28%|95.17%|
-|4|SVM|94.13%|94.93%|
-|5|Decision Tree|93.97%|93.97%|
-
-> 📌 \\\\\\\*\\\\\\\*Best Model:\\\\\\\*\\\\\\\* Naive Bayes achieved the highest test accuracy of \\\\\\\*\\\\\\\*95.83%\\\\\\\*\\\\\\\* on this dataset.
-
-\---
-
-## 📈 Evaluation Metrics
-
-Each model was evaluated using:
-
-|Metric|Description|
-|-|-|
-|**Accuracy**|Overall correct predictions / total predictions|
-|**Confusion Matrix**|Visual breakdown of True/False Positives \& Negatives|
-|**Classification Report**|Precision, Recall, F1-Score per class|
-|**Cross-Validation**|5-Fold StratifiedKFold for robust evaluation|
-|**Learning Curve**|Training vs Validation accuracy across dataset sizes|
-
-\---
-
-## 📉 Visualizations
-
-Each model includes:
-
-* **Confusion Matrix Heatmap** — shows prediction errors per class
-* **Learning Curve** — detects overfitting or underfitting
-* **KNN Decision Boundary** — 2D visualization using PCA
-
-\---
-
-## 🔍 Key Findings
-
-1. All five models performed **very well** (above 96%) due to clear feature separability between genders.
-2. **StandardScaler** was essential for distance-based models (KNN, SVM) — without it, results would be worse.
-3. **Cross-validation** provided a more reliable estimate than a single train-test split.
-4. **Learning Curves** showed no significant overfitting across any of the models.
-5. **Forehead width** and **forehead height** were among the most distinguishing features between genders.
-6. **Naive Bayes** was the best performing model with **95.83% accuracy**, despite its simplicity.
-
-\---
----
-
-
-
-\## 🌐 Deployment \& User Interface
-
-
-
-After selecting the best-performing model (\*\*Naive Bayes\*\*), we moved from the experimentation phase to building a simple interactive application.
-
-
-
-We developed a user-friendly interface using \*\*Gradio\*\* that allows users to enter facial characteristics and get the predicted gender directly.
-
-
-
-The interface takes the following inputs:
-
-
-
-\- Long Hair
-
-\- Forehead Width
-
-\- Forehead Height
-
-\- Nose Wide
-
-\- Nose Long
-
-\- Thin Lips
-
-\- Distance Between Nose and Lip
-
-
-
-The application uses the trained \*\*Naive Bayes model\*\* to make predictions and display the final result (\*\*Male/Female\*\*).
-
-
-
-This step helped us transform the project from a Jupyter Notebook experiment into a practical machine learning application.
-
-
-
-🔗 Live Demo:
-
-https://2u.pw/Mz5T6A
-
-
-
-\---
-
-
 
 ## ✅ Conclusion
 
-|Question|Answer|
-|-|-|
-|Best model?|**Naive Bayes (95.83%)**|
-|Most important features?|**Forehead width \& height**|
-|Any overfitting?|No — learning curves were stable|
-|Was scaling necessary?|Yes — especially for KNN and SVM|
-|Class balance?|Balanced — stratified split was used|
+This project demonstrates the complete machine learning workflow:
+
+**Data Understanding → Preprocessing → EDA → Model Training → Evaluation → Deployment**
+
+The final deployed model classifies gender from facial features with high accuracy, showcasing the power of classical Machine Learning techniques on structured data.
 
 \---
 
-## 🚀 How to Run
+<p align="center">
+  Machine Learning Course Project \&nbsp;•\&nbsp; Classification Analysis \&nbsp;•\&nbsp; 2025
+</p>
 
-
-
-Install required libraries:
-
-
-
-pip install pandas numpy matplotlib seaborn scikit-learn gradio joblib
-
-
-
-Run the application:
-
-
-
-python app.py
-
-
-
-The Gradio interface will open and you can test the trained model.
-
-
-
-\---
-
-## \## Developed by
-
-##### \* Enas Ibrahim Ali Elnsag
-
-##### \* Malak Tamer Mohamed Ali
-
-##### \* Salma Amer Ahmed Abdel Fattah
-
-##### \* Fatma Mohamed Helmy Mohamed
-
-##### \* Mariem Medhet Afifi
+<p align="center">
+  <code>#MachineLearning</code> \&nbsp;
+  <code>#DataScience</code> \&nbsp;
+  <code>#Python</code> \&nbsp;
+  <code>#Classification</code> \&nbsp;
+  <code>#NaiveBayes</code> \&nbsp;
+  <code>#Gradio</code>
+</p>
 
